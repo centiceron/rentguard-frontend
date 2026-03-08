@@ -919,7 +919,7 @@ export default function LandlordDashboard() {
           lease={activeCommandLease}
           userToken={user.token}
           role='landlord'
-          onTerminate={(leaseId) => setLeaseToTerminate(leaseId)}
+          onTerminate={(leaseId: string) => setLeaseToTerminate(leaseId)}
           onClose={() => setActiveCommandLease(null)}
         />
       )}
