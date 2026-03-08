@@ -347,7 +347,7 @@ export default function LeaseWizard({
       const userStr = localStorage.getItem("user");
       const token = userStr ? JSON.parse(userStr).token : "";
 
-      const response = await fetch("http://localhost:5000/api/lease/generate", {
+      const response = await fetch("http://rentguard-api.us-east-1.elasticbeanstalk.com/api/lease/generate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -388,7 +388,7 @@ export default function LeaseWizard({
       const userStr = localStorage.getItem("user");
       const token = userStr ? JSON.parse(userStr).token : "";
 
-      const response = await fetch("http://localhost:5000/api/lease/stamp", {
+      const response = await fetch("http://rentguard-api.us-east-1.elasticbeanstalk.com/api/lease/stamp", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

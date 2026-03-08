@@ -47,9 +47,12 @@ export default function LandlordDashboard() {
 
   const fetchMyLeases = async (token: string) => {
     try {
-      const res = await fetch("http://localhost:5000/api/lease/my-leases", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await fetch(
+        "http://rentguard-api.us-east-1.elasticbeanstalk.com/api/lease/my-leases",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
 
       // Catch the expired token!
       if (res.status === 401) {
@@ -110,7 +113,7 @@ export default function LandlordDashboard() {
     const pollSingleLease = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/lease/${leaseForLinks._id}`,
+          `http://rentguard-api.us-east-1.elasticbeanstalk.com/api/lease/${leaseForLinks._id}`,
           {
             headers: { Authorization: `Bearer ${user.token}` },
           },
@@ -144,7 +147,7 @@ export default function LandlordDashboard() {
     if (!leaseToDelete) return;
     try {
       const res = await fetch(
-        `http://localhost:5000/api/lease/${leaseToDelete}`,
+        `http://rentguard-api.us-east-1.elasticbeanstalk.com/api/lease/${leaseToDelete}`,
         {
           method: "DELETE",
           headers: { Authorization: `Bearer ${user.token}` },
@@ -165,7 +168,7 @@ export default function LandlordDashboard() {
     if (!leaseToSign || !signatureName.trim()) return;
     try {
       const res = await fetch(
-        `http://localhost:5000/api/lease/${leaseToSign}/sign-landlord`,
+        `http://rentguard-api.us-east-1.elasticbeanstalk.com/api/lease/${leaseToSign}/sign-landlord`,
         {
           method: "POST",
           headers: {
@@ -190,7 +193,7 @@ export default function LandlordDashboard() {
   const generateTenantLink = async (leaseId: string) => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/lease/${leaseId}/invite`,
+        `http://rentguard-api.us-east-1.elasticbeanstalk.com/api/lease/${leaseId}/invite`,
         {
           method: "POST",
           headers: { Authorization: `Bearer ${user.token}` },
@@ -207,7 +210,7 @@ export default function LandlordDashboard() {
   const generateWitnessLink = async (leaseId: string) => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/lease/${leaseId}/invite-witness`,
+        `http://rentguard-api.us-east-1.elasticbeanstalk.com/api/lease/${leaseId}/invite-witness`,
         {
           method: "POST",
           headers: { Authorization: `Bearer ${user.token}` },
@@ -225,7 +228,7 @@ export default function LandlordDashboard() {
     if (!leaseToTerminate) return;
     try {
       const res = await fetch(
-        `http://localhost:5000/api/lease/${leaseToTerminate}/terminate`,
+        `http://rentguard-api.us-east-1.elasticbeanstalk.com/api/lease/${leaseToTerminate}/terminate`,
         {
           method: "PUT",
           headers: { Authorization: `Bearer ${user.token}` },

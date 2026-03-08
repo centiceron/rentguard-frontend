@@ -53,7 +53,7 @@ export default function InviteGateway() {
   const verifyTokenPublic = async () => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/lease/${leaseId}/verify-invite?token=${token}`,
+        `http://rentguard-api.us-east-1.elasticbeanstalk.com/api/lease/${leaseId}/verify-invite?token=${token}`,
       );
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Failed to verify link.");
@@ -68,7 +68,7 @@ export default function InviteGateway() {
   const fetchFullLease = async (authToken: string) => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/lease/${leaseId}/tenant-view?token=${token}`,
+        `http://rentguard-api.us-east-1.elasticbeanstalk.com/api/lease/${leaseId}/tenant-view?token=${token}`,
         {
           headers: { Authorization: `Bearer ${authToken}` },
         },
@@ -96,7 +96,7 @@ export default function InviteGateway() {
     setSigning(true);
     try {
       const res = await fetch(
-        `http://localhost:5000/api/lease/${leaseId}/sign-tenant?token=${token}`,
+        `http://rentguard-api.us-east-1.elasticbeanstalk.com/api/lease/${leaseId}/sign-tenant?token=${token}`,
         {
           method: "POST",
           headers: {

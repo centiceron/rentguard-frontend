@@ -55,7 +55,7 @@ export default function LeaseGuardUploader() {
 
       console.log("Sending PDF to RentGuard AI API...");
       const response = await axios.post(
-        "http://localhost:5000/api/lease/analyze",
+        "http://rentguard-api.us-east-1.elasticbeanstalk.com/api/lease/analyze",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
