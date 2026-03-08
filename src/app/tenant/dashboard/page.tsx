@@ -59,12 +59,9 @@ export default function TenantDashboard() {
 
   const fetchMyLeases = async (token: string) => {
     try {
-      const res = await fetch(
-        "http://rentguard-api.us-east-1.elasticbeanstalk.com/api/lease/tenant-leases",
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        },
-      );
+      const res = await fetch("/api/lease/tenant-leases", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
       // Catch the expired token!
       if (res.status === 401) {
@@ -104,21 +101,18 @@ export default function TenantDashboard() {
       const base64String = (reader.result as string).split(",")[1];
 
       try {
-        const res = await fetch(
-          "http://rentguard-api.us-east-1.elasticbeanstalk.com/api/lease/tenant-external",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${user.token}`,
-            },
-            body: JSON.stringify({
-              pdfBase64: base64String,
-              landlordName: uploadLandlordName || "Unknown Broker",
-              monthlyRent: Number(uploadRentAmount) || 0,
-            }),
+        const res = await fetch("/api/lease/tenant-external", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
           },
-        );
+          body: JSON.stringify({
+            pdfBase64: base64String,
+            landlordName: uploadLandlordName || "Unknown Broker",
+            monthlyRent: Number(uploadRentAmount) || 0,
+          }),
+        });
 
         const data = await res.json();
 

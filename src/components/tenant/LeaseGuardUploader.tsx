@@ -54,13 +54,9 @@ export default function LeaseGuardUploader() {
       }, 800);
 
       console.log("Sending PDF to RentGuard AI API...");
-      const response = await axios.post(
-        "http://rentguard-api.us-east-1.elasticbeanstalk.com/api/lease/analyze",
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        },
-      );
+      const response = await axios.post("/api/lease/analyze", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
 
       clearInterval(progressInterval);
       setProgress(100);

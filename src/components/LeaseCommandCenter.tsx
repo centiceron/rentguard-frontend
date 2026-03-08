@@ -39,20 +39,17 @@ export default function LeaseCommandCenter({
   const handleAiScan = async () => {
     setIsScanning(true);
     try {
-      const res = await fetch(
-        `http://rentguard-api.us-east-1.elasticbeanstalk.com/api/lease/analyze-pdf`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${userToken}`,
-          },
-          body: JSON.stringify({
-            pdfBase64: lease.pdfBase64,
-            isExternal: false,
-          }),
+      const res = await fetch(`/api/lease/analyze-pdf`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userToken}`,
         },
-      );
+        body: JSON.stringify({
+          pdfBase64: lease.pdfBase64,
+          isExternal: false,
+        }),
+      });
       const data = await res.json();
       if (res.ok) setAiAnalysis(data.analysis);
     } catch (error) {
@@ -78,13 +75,10 @@ export default function LeaseCommandCenter({
     setTimeout(async () => {
       try {
         // ACTUAL BACKEND CALL TO SAVE THE STATUS
-        const res = await fetch(
-          `http://rentguard-api.us-east-1.elasticbeanstalk.com/api/lease/${lease._id}/autopay`,
-          {
-            method: "PUT",
-            headers: { Authorization: `Bearer ${userToken}` },
-          },
-        );
+        const res = await fetch(`/api/lease/${lease._id}/autopay`, {
+          method: "PUT",
+          headers: { Authorization: `Bearer ${userToken}` },
+        });
 
         if (res.ok) {
           setAutopayStep("success");

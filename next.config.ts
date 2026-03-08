@@ -6,10 +6,16 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  // This helps with some Amplify-specific SSR issues
-  images: {
-    unoptimized: true,
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        // Put your Beanstalk URL right here! (Keep the http://)
+        destination:
+          "http://rentguard-api.us-east-1.elasticbeanstalk.com/api/:path*",
+      },
+    ];
   },
 };
 
-module.exports = nextConfig; // Using module.exports for maximum compatibility
+module.exports = nextConfig; // Or export default nextConfig; depending on your setup

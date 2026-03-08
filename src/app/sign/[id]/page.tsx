@@ -36,12 +36,9 @@ export default function SignatureRoom() {
 
     const fetchFullLease = async () => {
       try {
-        const res = await fetch(
-          `http://rentguard-api.us-east-1.elasticbeanstalk.com/api/lease/${id}`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          },
-        );
+        const res = await fetch(`/api/lease/${id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         const data = await res.json();
         if (res.ok) setLeaseDetails(data.lease);
       } catch (error) {
@@ -58,17 +55,14 @@ export default function SignatureRoom() {
     setIsAccepting(true);
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(
-        "http://rentguard-api.us-east-1.elasticbeanstalk.com/api/lease/handshake",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ leaseId: id }),
+      const response = await fetch("/api/lease/handshake", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
-      );
+        body: JSON.stringify({ leaseId: id }),
+      });
 
       const data = await response.json();
 

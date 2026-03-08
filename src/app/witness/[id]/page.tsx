@@ -49,7 +49,7 @@ export default function WitnessGateway() {
   const verifyToken = async () => {
     try {
       const res = await fetch(
-        `http://rentguard-api.us-east-1.elasticbeanstalk.com/api/lease/${leaseId}/verify-witness?token=${token}`,
+        `/api/lease/${leaseId}/verify-witness?token=${token}`,
       );
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Failed to verify link.");
@@ -96,7 +96,7 @@ export default function WitnessGateway() {
     setSigning(true);
     try {
       const res = await fetch(
-        `http://rentguard-api.us-east-1.elasticbeanstalk.com/api/lease/${leaseId}/sign-witness?token=${token}`,
+        `/api/lease/${leaseId}/sign-witness?token=${token}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
