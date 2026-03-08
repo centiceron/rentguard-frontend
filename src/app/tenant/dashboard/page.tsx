@@ -588,17 +588,19 @@ export default function TenantDashboard() {
           onClose={() => setActiveCommandLease(null)}
         />
       )}
-      {/* 🔥 RENDER PAYMENT GATEWAY MODAL */}
+      {/* RENDER PAYMENT GATEWAY MODAL */}
       {showPaymentGateway && (
-        <div className='fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-[70] flex items-center justify-center p-4 animate-in fade-in'>
-          {/* I'm assuming your existing PaymentGateway accepts amount, onSuccess, and onClose props. Adjust if needed! */}
+        <div className='fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-[70] flex items-center justify-center p-4'>
           <PaymentGateway
             amount={totalMonthlyRent}
+            purpose='Monthly Rent Payment' // Added this
+            payeeName='Property Manager' // Added this
             onSuccess={() => {
               alert("Payment Successful! Rent receipt generated.");
               setShowPaymentGateway(false);
             }}
-            onClose={() => setShowPaymentGateway(false)}
+            onCancel={() => setShowPaymentGateway(false)} // Changed from onClose to onCancel to match your interface
+            onClose={() => setShowPaymentGateway(false)} // Kept if your interface now includes it
           />
         </div>
       )}

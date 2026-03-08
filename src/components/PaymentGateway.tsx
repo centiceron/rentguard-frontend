@@ -18,6 +18,7 @@ interface PaymentGatewayProps {
   payeeName: string; // e.g., "Govt. of India (SHCIL)" or Landlord's Name
   onSuccess: () => void;
   onCancel: () => void;
+  onClose: () => void;
 }
 
 export default function PaymentGateway({
@@ -26,6 +27,7 @@ export default function PaymentGateway({
   payeeName,
   onSuccess,
   onCancel,
+  onClose,
 }: PaymentGatewayProps) {
   const [processing, setProcessing] = useState(false);
   const [success, setSuccess] = useState(false);
